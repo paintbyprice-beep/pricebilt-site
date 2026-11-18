@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricebilt Inc. — Zero-Dependency Developer & Treasury Utilities</title>
+  <style>
+    :root {
+      --bg: #06090e;
+      --surface: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+      --gold: #d4af37;
+      --gold-bright: #f3ce5e;
+      --green: #238636;
+      --green-hover: #2ea44f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; }
+
+    /* Top Contact Bar */
+    .top-bar {
+      background: #010409;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 16px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .top-bar a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Main Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .logo span { color: var(--text); }
+    .nav-btn {
+      background: var(--gold);
+      color: #06090e;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 20px 36px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 5px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 660px;
+      margin: 0 auto 24px;
+      font-size: 1rem;
+    }
+
+    /* Product Grid */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 10px 20px 50px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--gold); }
+    .card.featured {
+      border: 2px solid var(--gold);
+      background: linear-gradient(180deg, #1b2028 0%, #12161c 100%);
+    }
+    .tag {
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #3fb950;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+    .price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .price small {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .buy-btn {
+      background: var(--green);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: background 0.15s;
+    }
+    .buy-btn:hover { background: var(--green-hover); }
+    .card.featured .buy-btn {
+      background: var(--gold);
+      color: #06090e;
+    }
+
+    /* Bottom Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, #1b1506 0%, #2b2109 100%);
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 32px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-banner h3 {
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .cta-banner p {
+      color: var(--text);
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 20px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    Direct Support: <a href="tel:9702083060">970-208-3060</a> &nbsp;|&nbsp; <a href="mailto:brian@pricebilt.info">brian@pricebilt.info</a>
+  </div>
+
+  <header>
+    <div class="logo">PRICEBILT <span>INC.</span></div>
+    <a href="https://gumroad.com" target="_blank" class="nav-btn">Open Storefront</a>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Zero Monthly Fees • 100% Offline Architecture</div>
+    <h1>Autonomous Developer &amp; Treasury Utilities</h1>
+    <p>Lightweight, single-file HTML/JS tools engineered for API builders, node operators, and arbitrage traders. Pay once, download instantly, and run locally with zero cloud bloat.</p>
+  </section>
+
+  <main class="container">
+    <div class="grid">
+
+      <!-- Product 1: Bot-Gate -->
+      <div class="card">
+        <div>
+          <div class="tag">Failover Active: &lt;500ms</div>
+          <h2>Bot-Gate Multi-Pass</h2>
+          <p>Autonomous HTTP 429 rate-limit and timeout failover router. Automatically rotates backup API keys in under 500ms with zero packet loss.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$19 <small>USD</small></div>
+          <a href="https://gumroad.com" target="_blank" class="buy-btn">Get License</a>
+        </div>
+      </div>
+
+      <!-- Product 2: Node-Watch -->
+      <div class="card">
+        <div>
+          <div class="tag">Live Telemetry Monitor</div>
+          <h2>Node-Watch Endpoint Monitor</h2>
+          <p>Real-time decentralized RPC and webhook uptime monitor with millisecond latency tracking and instant connection drop alerts.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$19 <small>USD</small></div>
+          <a href="https://gumroad.com/l/ugoqos" target="_blank" class="buy-btn">Get License</a>
+        </div>
+      </div>
+
+      <!-- Product 3: Price-Pulse -->
+      <div class="card">
+        <div>
+          <div class="tag">Net Spread Calculator</div>
+          <h2>Price-Pulse Arbitrage Engine</h2>
+          <p>Multi-exchange crypto spread and maker/taker fee calculator with slippage stress-testing so you verify net profit before executing trades.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$19 <small>USD</small></div>
+          <a href="https://gumroad.com" target="_blank" class="buy-btn">Get License</a>
+        </div>
+      </div>
+
+      <!-- Product 4: Work Launcher -->
+      <div class="card">
+        <div>
+          <div class="tag">Sandbox Ready: Offline</div>
+          <h2>Pricebilt Work Launcher</h2>
+          <p>Instant static HTML/JS sandbox runtime engine. Load and run standalone utilities directly from phone or desktop downloads with zero servers.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$19 <small>USD</small></div>
+          <a href="https://gumroad.com" target="_blank" class="buy-btn">Get License</a>
+        </div>
+      </div>
+
+      <!-- Product 5: Satoshi-Split -->
+      <div class="card">
+        <div>
+          <div class="tag">Flagship Treasury Router</div>
+          <h2>Satoshi-Split Revenue Router</h2>
+          <p>Offline profit and crypto treasury splitter. Automatically allocate payouts into tax reserves, ops float, cold storage wallets, and owner draw with CSV export.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$29 <small>USD</small></div>
+          <a href="https://gumroad.com" target="_blank" class="buy-btn">Get License</a>
+        </div>
+      </div>
+
+      <!-- Product 6: 5-in-1 Bundle -->
+      <div class="card featured">
+        <div>
+          <div class="tag">Best Value • All 5 Tools</div>
+          <h2>Pricebilt Pro Dev Suite (5-in-1)</h2>
+          <p>Get every Pricebilt utility in one complete package: Bot-Gate, Node-Watch, Price-Pulse, Work Launcher, and Satoshi-Split with lifetime updates.</p>
+        </div>
+        <div class="price-row">
+          <div class="price">$59 <small>USD</small></div>
+          <a href="https://gumroad.com" target="_blank" class="buy-btn">Get Full Suite</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cta-banner">
+      <h3>Unlock Your Profit Potential Today</h3>
+      <p>Skip recurring SaaS subscriptions. Grab the complete 5-in-1 Pricebilt Pro Dev Suite or launch any individual utility in seconds.</p>
+      <a href="https://gumroad.com" target="_blank" class="nav-btn">Browse All Tools on Gumroad</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Pricebilt Inc. &bull; Grand Junction, Colorado &bull; <a href="tel:9702083060">970-208-3060</a> &bull; <a href="mailto:brian@pricebilt.info">brian@pricebilt.info</a>
+  </footer>
+
+</body>
+</html>
+
